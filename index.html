@@ -6,18 +6,28 @@
     <title>Iframe Dinâmico</title>
 </head>
 <body>
+
+    <p id="output"></p>
+    
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Obtém os parâmetros da URL
         const params = new URLSearchParams(window.location.search);
 
-        // Decodifica o valor do parâmetro 'link'
-        const linka = (params.get('link'));
+        const urlCompleta = "https://script.google.com/macros/s/AKfycbw6QhwvWDunYz0rFJTqsQAGOJk6RDTmX7N-f3nf32hyMNvQPXDJE13JDJHrrY1_qi6D/exec?numeroPedido=102&email=tiagovix3%40gmail.com&subpastasDisponiveis=ADIVINHE%20QUEM%2CCA%C3%87A%20PALAVRAS%2CCORRIDA%20DO%20ALFABETO%2CCRUZADINHA%2CC%C3%81PSULA%20DO%20TEMPO%2CDESEJOS%20PARA%20O%20BEB%C3%8A%2CDESEMBARALHANDO%20AS%20LETRAS%2CO%20QUE%20TEM%20NA%20BOLSA%2CO%20QUE%20TEM%20NO%20CELULAR%2CQUANTO%20CUSTA%2CQUANTO%20MEDE%20A%20BARRIGA%20DA%20MAM%C3%83E%2CSTOP%20DO%20BEB%C3%8A";
+        console.log('esta é a url completa: ' + urlCompleta);
+
+        // Obtém o valor do parâmetro 'link' e converte explicitamente para string
+        const linka = String(params.get('linka'));
+
         const link = encodeURIComponent(linka);
-        //console.log(encodeURIComponent(link));
+
+        const saida = document.getElementById('output');
+        saida.innerText = link;
+        console.log('este é o link obtido: ' + link);
 
         if (link) {
-            // Cria o iframe com o 'src' obtido da URL decodificada
+            // Cria o iframe com o 'src' obtido da URL
             const frama = document.createElement('iframe');
             frama.setAttribute("src", link); // Define o src com o valor dinâmico
             frama.setAttribute("width", "100%");
