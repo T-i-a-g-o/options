@@ -1,55 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Solicitar Jogos Adicionais</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background-color: #f0f0f0;
-      font-family: Arial, sans-serif;
-    }
-
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
-    }
-
-    #errorMessage {
-      display: none;
-      color: red;
-      text-align: center;
-      font-size: 18px;
-      margin: 20px;
-    }
-  </style>
-
-  <script>
-    // Função para obter parâmetros da URL
-    function getQueryParam(param) {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get(param);
-    }
-
-    // Armazena o link globalmente para uso no onload
-    let dynamicLink = getQueryParam('link');
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
-  <div id="errorMessage">Erro: Nenhum link válido foi fornecido. Por favor, acesse esta página através do link enviado por e-mail.</div>
-
-  <iframe id="formIframe" onload="
-    if (dynamicLink) {
-      this.src = decodeURIComponent(dynamicLink);
-    } else {
-      this.style.display = 'none';
-      document.getElementById('errorMessage').style.display = 'block';
-    }
-  "></iframe>
+    <iframe src="https://script.google.com/macros/s/AKfycbw6QhwvWDunYz0rFJTqsQAGOJk6RDTmX7N-f3nf32hyMNvQPXDJE13JDJHrrY1_qi6D/exec?numeroPedido=101&email=teste3%40gmail.com&subpastasDisponiveis=ADIVINHE%20QUEM%2CCA%C3%87A%20PALAVRAS%2CCORRIDA%20DO%20ALFABETO%2CCRUZADINHA%2CC%C3%81PSULA%20DO%20TEMPO%2CDESEJOS%20PARA%20O%20BEB%C3%8A%2CDESEMBARALHANDO%20AS%20LETRAS%2CO%20QUE%20TEM%20NA%20BOLSA%2CO%20QUE%20TEM%20NO%20CELULAR%2CQUANTO%20CUSTA%2CQUANTO%20MEDE%20A%20BARRIGA%20DA%20MAM%C3%83E%2CSTOP%20DO%20BEB%C3%8A" 
+    frameborder="0" width="100%" height="1000px"></iframe>
 </body>
 </html>
