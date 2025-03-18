@@ -6,6 +6,8 @@
     <title>Iframe Dinâmico</title>
 </head>
 <body>
+
+    <p id="output"></p>
     
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -17,6 +19,9 @@
 
         // Obtém o valor do parâmetro 'link' e converte explicitamente para string
         const link = String(params.get('link'));
+
+        const saida = document.getElementById('output');
+        saida.innerText = link;
         console.log('este é o link obtido: ' + link);
 
         if (link) {
