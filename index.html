@@ -43,15 +43,11 @@
     }
 
     const link = getQueryParam('link');
-    const iframe = document.getElementById('formIframe');
+    const iframe = document.getElementById('formIframe').value;
     const errorMessage = document.getElementById('errorMessage');
 
-    if (link) {
-      iframe.src = decodeURIComponent(link);
-    } else {
-      iframe.style.display = 'none';
-      errorMessage.style.display = 'block';
-    }
+    iframe.innerHTML = link
+    
   </script>
 </body>
 </html>
