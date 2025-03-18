@@ -12,7 +12,8 @@
         const params = new URLSearchParams(window.location.search);
 
         // Decodifica o valor do parâmetro 'link'
-        const link = encodeURIComponent(params.get('link'));
+        const linka = (params.get('link'));
+        const link = encodeURIComponent(linka);
         //console.log(encodeURIComponent(link));
 
         if (link) {
