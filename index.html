@@ -2,43 +2,106 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iframe Dinâmico</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Solicitar Jogos Adicionais</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            height: 1000px;
+            border: none;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        #errorMessage {
+            display: none;
+            color: red;
+            text-align: center;
+            font-size: 18px;
+            margin: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-width: 90%;
+        }
+        @media (max-width: 768px) {
+            iframe {
+                height: auto;
+                min-height: 100vh;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                padding: 0;
+                min-height: auto;
+            }
+            #errorMessage {
+                font-size: 16px;
+                margin: 10px;
+            }
+        }
+        @media (max-width: 480px) {
+            iframe {
+                min-height: 100vh;
+            }
+            #errorMessage {
+                font-size: 14px;
+                margin: 5px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div id="errorMessage">Erro: Nenhum link válido foi fornecido. Por favor, acesse esta página através do link enviado por e-mail.</div>
+    <iframe id="formIframe" frameborder="0"></iframe>
 
-    <p id="output"></p>
-    
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Obtém os parâmetros da URL
-        const params = new URLSearchParams(window.location.search);
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
 
-        const urlCompleta = "https://script.google.com/macros/s/AKfycbw6QhwvWDunYz0rFJTqsQAGOJk6RDTmX7N-f3nf32hyMNvQPXDJE13JDJHrrY1_qi6D/exec?numeroPedido=102&email=tiagovix3%40gmail.com&subpastasDisponiveis=ADIVINHE%20QUEM%2CCA%C3%87A%20PALAVRAS%2CCORRIDA%20DO%20ALFABETO%2CCRUZADINHA%2CC%C3%81PSULA%20DO%20TEMPO%2CDESEJOS%20PARA%20O%20BEB%C3%8A%2CDESEMBARALHANDO%20AS%20LETRAS%2CO%20QUE%20TEM%20NA%20BOLSA%2CO%20QUE%20TEM%20NO%20CELULAR%2CQUANTO%20CUSTA%2CQUANTO%20MEDE%20A%20BARRIGA%20DA%20MAM%C3%83E%2CSTOP%20DO%20BEB%C3%8A";
-        console.log('esta é a url completa: ' + urlCompleta);
-
-        // Obtém o valor do parâmetro 'link' e converte explicitamente para string
-        const linka = String(params.get('linka'));
-
-        const link = encodeURIComponent(linka);
-
-        const saida = document.getElementById('output');
-        saida.innerText = link;
-        console.log('este é o link obtido: ' + link);
+        const link = getQueryParam('link');
+        const iframe = document.getElementById('formIframe');
+        const errorMessage = document.getElementById('errorMessage');
 
         if (link) {
-            // Cria o iframe com o 'src' obtido da URL
-            const frama = document.createElement('iframe');
-            frama.setAttribute("src", link); // Define o src com o valor dinâmico
-            frama.setAttribute("width", "100%");
-            frama.setAttribute("height", "500px");
-            frama.setAttribute("frameborder", "0"); // Remove a borda
-            document.body.appendChild(frama); // Adiciona ao body
+            const decodedLink = decodeURIComponent(link);
+            console.log("Link decodificado encontrado na URL: " + decodedLink);
+            iframe.src = decodedLink;
+
+            iframe.onload = function() {
+                console.log("Iframe carregado com sucesso. URL: " + decodedLink);
+            };
+
+            iframe.onerror = function() {
+                console.error("Erro ao carregar o iframe. URL: " + decodedLink);
+                iframe.style.display = 'none';
+                errorMessage.style.display = 'block';
+                errorMessage.textContent = "Erro: Não foi possível carregar o formulário. Verifique o link ou a conexão.";
+            };
         } else {
-            // Caso o parâmetro 'link' não esteja presente ou seja inválido
-            console.error('O parâmetro "link" não foi encontrado ou está vazio.');
+            console.log("Nenhum link encontrado na URL. Parâmetros: " + window.location.search);
+            iframe.style.display = 'none';
+            errorMessage.style.display = 'block';
         }
-    });
+
+        window.addEventListener('resize', function() {
+            iframe.style.height = window.innerHeight + 'px';
+            console.log("Redimensionando iframe para altura: " + window.innerHeight + "px");
+        });
     </script>
 </body>
 </html>
