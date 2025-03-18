@@ -13,7 +13,6 @@
             justify-content: center;
             align-items: center;
             background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
         }
         iframe {
             width: 100%;
@@ -27,7 +26,6 @@
             font-size: 18px;
             margin: 20px;
         }
-        /* Ajustes para dispositivos móveis */
         @media (max-width: 768px) {
             iframe {
                 height: 100vh;
@@ -46,7 +44,7 @@
             return urlParams.get(param);
         }
 
-        // Obtém o parâmetro 'link' da URL
+        // Obtém o parâmetro 'link' da URL (gerado pela função criarFormularioParaComprador)
         const link = getQueryParam('link');
 
         // Seleciona o iframe e o elemento de erro
@@ -57,7 +55,6 @@
         if (link) {
             iframe.src = link;
         } else {
-            // Se não houver link, esconde o iframe e mostra a mensagem de erro
             iframe.style.display = 'none';
             errorMessage.style.display = 'block';
         }
