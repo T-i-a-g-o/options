@@ -1,116 +1,39 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Solicitar Jogos Adicionais</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
-            overflow: hidden;
-        }
-        iframe {
-            width: 100%;
-            height: 1000px; /* Valor inicial baseado no seu código funcional */
-            border: none;
-            max-width: 100%;
-            box-sizing: border-box;
-        }
-        #errorMessage {
-            display: none;
-            color: red;
-            text-align: center;
-            font-size: 18px;
-            margin: 20px;
-            padding: 10px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            max-width: 90%;
-        }
-        /* Ajustes para dispositivos móveis */
-        @media (max-width: 768px) {
-            iframe {
-                height: auto;
-                min-height: 100vh; /* Ocupa toda a altura da tela */
-                width: 100%;
-                margin: 0;
-                padding: 0;
-            }
-            body {
-                padding: 0;
-                min-height: auto;
-            }
-            #errorMessage {
-                font-size: 16px;
-                margin: 10px;
-            }
-        }
-        /* Ajustes para telas muito pequenas */
-        @media (max-width: 480px) {
-            iframe {
-                min-height: 100vh;
-            }
-            #errorMessage {
-                font-size: 14px;
-                margin: 5px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário Dinâmico</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    iframe {
+      width: 100%;
+      height: 100vh;
+      border: none;
+    }
+  </style>
 </head>
 <body>
-    <div id="errorMessage">Erro: Nenhum link válido foi fornecido. Por favor, acesse esta página através do link enviado por e-mail.</div>
-    <iframe id="formIframe" frameborder="0"></iframe>
+  <iframe id="formIframe" src=""></iframe>
 
-    <script>
-        // Função para obter o parâmetro 'link' da URL
-        function getQueryParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
-        }
+  <script>
+    // Função para extrair o parâmetro "url" da URL atual
+    function getIframeURL() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("url");
+    }
 
-        // Obtém o parâmetro 'link' da URL
-        const link = getQueryParam('link');
+    const iframeSrc = getIframeURL();
 
-        // Seleciona o iframe e o elemento de erro
-        const iframe = document.getElementById('formIframe');
-        const errorMessage = document.getElementById('errorMessage');
-
-        // Verifica se o parâmetro 'link' existe e define o src do iframe
-        if (link) {
-            const decodedLink = decodeURIComponent(link); // Decodifica o link para evitar problemas com caracteres especiais
-            console.log("Link decodificado encontrado na URL: " + decodedLink); // Depuração
-            iframe.src = decodedLink;
-
-            // Verifica se o iframe carrega corretamente
-            iframe.onload = function() {
-                console.log("Iframe carregado com sucesso. URL: " + decodedLink);
-            };
-
-            iframe.onerror = function() {
-                console.error("Erro ao carregar o iframe. URL: " + decodedLink);
-                iframe.style.display = 'none';
-                errorMessage.style.display = 'block';
-                errorMessage.textContent = "Erro: Não foi possível carregar o formulário. Verifique o link ou a conexão.";
-            };
-        } else {
-            console.log("Nenhum link encontrado na URL. Parâmetros: " + window.location.search);
-            iframe.style.display = 'none';
-            errorMessage.style.display = 'block';
-        }
-
-        // Ajusta dinamicamente o tamanho do iframe após o carregamento
-        window.addEventListener('resize', function() {
-            iframe.style.height = window.innerHeight + 'px';
-            console.log("Redimensionando iframe para altura: " + window.innerHeight + "px");
-        });
-    </script>
+    if (iframeSrc) {
+      document.getElementById("formIframe").src = decodeURIComponent(iframeSrc);
+    } else {
+      document.body.innerHTML = "<p style='padding:20px; font-size:18px;'>Parâmetro <code>url</code> não encontrado na URL.</p>";
+    }
+  </script>
 </body>
 </html>
