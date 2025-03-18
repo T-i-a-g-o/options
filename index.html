@@ -13,6 +13,7 @@
             justify-content: center;
             align-items: center;
             background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
         }
         iframe {
             width: 100%;
@@ -53,8 +54,10 @@
 
         // Verifica se o parâmetro 'link' existe e define o src do iframe
         if (link) {
+            console.log("Link encontrado na URL: " + link);
             iframe.src = link;
         } else {
+            console.log("Nenhum link encontrado na URL.");
             iframe.style.display = 'none';
             errorMessage.style.display = 'block';
         }
