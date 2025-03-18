@@ -12,8 +12,8 @@
         const params = new URLSearchParams(window.location.search);
 
         // Decodifica o valor do parâmetro 'link'
-        const link = decodeURIComponent(params.get('link'));
-        console.log(encodeURIComponent(link));
+        const link = encodeURIComponent(params.get('link'));
+        //console.log(encodeURIComponent(link));
 
         if (link) {
             // Cria o iframe com o 'src' obtido da URL decodificada
