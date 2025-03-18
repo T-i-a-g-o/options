@@ -3,18 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inserir Iframe no Body</title>
+    <title>Iframe Dinâmico</title>
 </head>
 <body>
     <script>
-    // Executa o código quando a página for carregada
+    // Executa quando o DOM estiver carregado
     document.addEventListener('DOMContentLoaded', function() {
-        const frama = document.createElement('iframe');
-        frama.setAttribute("src", "https://script.google.com/macros/s/AKfycbw6QhwvWDunYz0rFJTqsQAGOJk6RDTmX7N-f3nf32hyMNvQPXDJE13JDJHrrY1_qi6D/exec?numeroPedido=101&email=teste3%40gmail.com&subpastasDisponiveis=ADIVINHE%20QUEM%2CCA%C3%87A%20PALAVRAS%2CCORRIDA%20DO%20ALFABETO%2CCRUZADINHA%2CC%C3%81PSULA%20DO%20TEMPO%2CDESEJOS%20PARA%20O%20BEB%C3%8A%2CDESEMBARALHANDO%20AS%20LETRAS%2CO%20QUE%20TEM%20NA%20BOLSA%2CO%20QUE%20TEM%20NO%20CELULAR%2CQUANTO%20CUSTA%2CQUANTO%20MEDE%20A%20BARRIGA%20DA%20MAM%C3%83E%2CSTOP%20DO%20BEB%C3%8A");
-        frama.setAttribute("width", "100%");
-        frama.setAttribute("height", "1000px");
-        frama.setAttribute("frameborder", "0"); // Opcional: remove a borda do iframe
-        document.body.appendChild(frama); // Insere diretamente no body
+        // Obtém os parâmetros da URL
+        const params = new URLSearchParams(window.location.search);
+
+        // Obtém o valor do parâmetro 'link'
+        const link = params.get('link');
+
+        // Verifica se o parâmetro 'link' existe e tem um valor
+        if (link) {
+            const frama = document.createElement('iframe');
+            frama.setAttribute("src", link); // Define o src com o valor do parâmetro
+            frama.setAttribute("width", "100%");
+            frama.setAttribute("height", "500px");
+            frama.setAttribute("frameborder", "0"); // Remove a borda
+            document.body.appendChild(frama); // Adiciona o iframe ao body
+        } else {
+            console.error('O parâmetro "link" não foi fornecido na URL.');
+        }
     });
     </script>
 </body>
