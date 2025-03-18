@@ -37,30 +37,30 @@
 <body>
     <div id="errorMessage">Erro: Nenhum link válido foi fornecido. Por favor, acesse esta página através do link enviado por e-mail.</div>
     <iframe id="formIframe"></iframe>
-<script>
-    // Função para obter o parâmetro 'link' da URL
-    function getQueryParam(param) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(param);
-    }
 
-    // Obtém o parâmetro 'link' da URL
-    const link = getQueryParam('link');
+    <script>
+        // Função para obter o parâmetro 'link' da URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
 
-    // Seleciona o iframe e o elemento de erro
-    const iframe = document.getElementById('formIframe');
-    const errorMessage = document.getElementById('errorMessage');
+        // Obtém o parâmetro 'link' da URL
+        const link = getQueryParam('link');
 
-    // Verifica se o parâmetro 'link' existe e define o src do iframe
-    if (link) {
-        console.log("Link encontrado na URL: " + link);
-        iframe.src = link;
-    } else {
-        console.log("Nenhum link encontrado na URL.");
-        iframe.style.display = 'none';
-        errorMessage.style.display = 'block';
-    }
-</script>
+        // Seleciona o iframe e o elemento de erro
+        const iframe = document.getElementById('formIframe');
+        const errorMessage = document.getElementById('errorMessage');
 
+        // Verifica se o parâmetro 'link' existe e define o src do iframe
+        if (link) {
+            console.log("Link encontrado na URL: " + link);
+            iframe.src = link;
+        } else {
+            console.log("Nenhum link encontrado na URL.");
+            iframe.style.display = 'none';
+            errorMessage.style.display = 'block';
+        }
+    </script>
 </body>
 </html>
