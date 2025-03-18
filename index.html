@@ -11,23 +11,20 @@
         // Obtém os parâmetros da URL
         const params = new URLSearchParams(window.location.search);
 
-        // Verifica e exibe todos os parâmetros para diagnóstico (opcional)
-        console.log('Parâmetros encontrados:', Object.fromEntries(params.entries()));
-
         // Obtém o valor do parâmetro 'link'
         const link = params.get('link');
 
         if (link) {
-            // Cria e insere o iframe se o 'link' existir
+            // Cria o iframe com o 'src' obtido da URL
             const frama = document.createElement('iframe');
-            frama.setAttribute("src", link);
+            frama.setAttribute("src", link); // Usa o valor dinâmico do parâmetro
             frama.setAttribute("width", "100%");
             frama.setAttribute("height", "500px");
-            frama.setAttribute("frameborder", "0");
-            document.body.appendChild(frama);
+            frama.setAttribute("frameborder", "0"); // Remove a borda
+            document.body.appendChild(frama); // Adiciona ao body
         } else {
-            // Alerta se o parâmetro 'link' estiver ausente
-            console.error('Parâmetro "link" não encontrado na URL.');
+            // Caso o parâmetro 'link' não esteja presente
+            console.error('O parâmetro "link" não foi encontrado na URL.');
         }
     });
     </script>
