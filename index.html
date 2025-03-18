@@ -1,53 +1,66 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Solicitar Jogos Adicionais</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background-color: #f0f0f0;
-      font-family: Arial, sans-serif;
-    }
-
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
-    }
-
-    #errorMessage {
-      display: none;
-      color: red;
-      text-align: center;
-      font-size: 18px;
-      margin: 20px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitar Jogos Adicionais</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        #errorMessage {
+            display: none;
+            color: red;
+            text-align: center;
+            font-size: 18px;
+            margin: 20px;
+        }
+        @media (max-width: 768px) {
+            iframe {
+                height: 100vh;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div id="errorMessage">Erro: Nenhum link válido foi fornecido. Por favor, acesse esta página através do link enviado por e-mail.</div>
-  
-
-  <iframe id="formIframe" src="" 
-    frameborder="0" width="100%" height="1000px"></iframe>
-
-  <script>
+    <div id="errorMessage">Erro: Nenhum link válido foi fornecido. Por favor, acesse esta página através do link enviado por e-mail.</div>
+    <iframe id="formIframe"></iframe>
+<script>
+    // Função para obter o parâmetro 'link' da URL
     function getQueryParam(param) {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get(param);
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
     }
 
+    // Obtém o parâmetro 'link' da URL
     const link = getQueryParam('link');
-    const iframe = document.getElementById('formIframe').value;
+
+    // Seleciona o iframe e o elemento de erro
+    const iframe = document.getElementById('formIframe');
     const errorMessage = document.getElementById('errorMessage');
 
-    iframe.innerHTML = link
-    
-  </script>
+    // Verifica se o parâmetro 'link' existe e define o src do iframe
+    if (link) {
+        console.log("Link encontrado na URL: " + link);
+        iframe.src = link;
+    } else {
+        console.log("Nenhum link encontrado na URL.");
+        iframe.style.display = 'none';
+        errorMessage.style.display = 'block';
+    }
+</script>
+
 </body>
 </html>
